@@ -1,0 +1,5 @@
+<Config>
+<% @settings.each do |key, value| -%>
+  <<%= key %>><%= value || "\n  " %></<%= key %>>
+<% end -%>
+</Config>
