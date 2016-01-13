@@ -1,9 +1,8 @@
 user node[:sonarr][:user] do
   system true
-  shell '/bin/bash'
-  home node[:sonarr][:home]
   manage_home true
-  system true
+  home node[:sonarr][:home]
+  shell '/bin/bash'
 end
 
 apt_repository 'sonarr' do
