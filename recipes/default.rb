@@ -15,9 +15,24 @@ end
 
 package 'nzbdrone'
 
-template '/etc/init/sonarr.conf' do
-  source 'init.conf.erb'
-  variables user: node[:sonarr][:user]
+case node['platform']
+when 'ubuntu'
+  if node['platform_version'].to_f >= 15.04
+    template '/etc/systemd/system/sonarr.service' do
+      source 'sonarr.service.erb'
+      variables user: node[:sonarr][:user]
+  end
+  elsif node['platform_version'].to_f >= 12.04
+    template '/etc/init/sonarr.conf' do
+      source 'init.conf.erb'
+      variables user: node[:sonarr][:user]
+    end
+  end
+else
+  template '/etc/init/sonarr.conf' do
+    source 'init.conf.erb'
+    variables user: node[:sonarr][:user]
+  end
 end
 
 service 'sonarr'
