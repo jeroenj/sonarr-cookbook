@@ -40,6 +40,7 @@ service 'sonarr'
 directory ::File.join(node[:sonarr][:home], '.config') do
   user node[:sonarr][:user]
   group node[:sonarr][:user]
+  recursive true
 end
 
 directory ::File.join(node[:sonarr][:home], '.config/NzbDrone') do
